@@ -7,6 +7,19 @@
       forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
     in
     {
+      devEnv = forAllSystems (system:
+        let
+          pkgs = import inputs.nixpkgs { inherit system; };
+        in
+          pkgs.buildEnv {
+            name = "devenv";
+            paths = with pkgs; [
+              hello
+              babashka
+              (python3.withPackages (ps: with ps; [numpy]))
+            ];
+          }
+      );
       devShells = forAllSystems (system:
         let
           pkgs = import inputs.nixpkgs { inherit system; };

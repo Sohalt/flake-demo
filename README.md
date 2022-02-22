@@ -16,3 +16,5 @@ babashka v0.7.2
 ```
 
 Enter shell environment with `nix develop .#unstable`
+
+Alternatively `nix shell .#devEnv.x86_64-linux`
